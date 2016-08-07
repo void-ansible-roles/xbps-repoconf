@@ -1,0 +1,3 @@
+*filter
+-A OUTPUT -p tcp -d {{ xbps_repository_address }} --dport {{ xbps_repository_port }} -j ACCEPT
+COMMIT

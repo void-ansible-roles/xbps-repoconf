@@ -1,0 +1,7 @@
+---
+xbps_repository_main: https://repo.voidlinux.eu/current
+xbps_repository_nonfree: https://repo.voidlinux.eu/current/nonfree
+xbps_repository_multilib: https://repo.voidlinux.eu/current/multilib
+xbps_repository_multilib-nonfree: https://repo.voidlinux.eu/current/multilib/nonfree
+xbps_repository_address: repo.voidlinux.eu
+xbps_repository_port: 443
