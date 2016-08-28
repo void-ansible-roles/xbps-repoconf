@@ -15,5 +15,17 @@
     - 10-repository-multilib
     - 10-repository-multilib-nonfree
 
+- name: Configure additional repositories
+  template: src=additional_repo.conf dest=/etc/xbps.d/{{ item.key }}.conf owner=root group=root mode=0644
+  with_dict:
+    "{{ xbps_repoconf_repos }}"
+  when: xbps_repoconf_repos is defined
+
+- name: Configure additional repository fingerprints
+  copy: src=assets/xbps/{{ item.value.fingerprint }}.plist dest=/var/db/xbps/keys/{{ item.value.fingerprint }}.plist owner=root group=root mode=0644
+  with_dict:
+    "{{ xbps_repoconf_repos }}"
+  when: xbps_repoconf_repos is defined
+
 - name: Sync XBPS
   xbps: update_cache=yes
