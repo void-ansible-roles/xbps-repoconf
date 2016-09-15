@@ -6,5 +6,5 @@ COMMIT
 {% for repo in xbps_repoconf_repos %}
 -A OUTPUT -p tcp -d {{ xbps_repoconf_repos[repo].serveraddr }} --dport {{ xbps_repoconf_repos[repo].serverport }} -j ACCEPT
 {% endfor %}
-{% endif %}
 COMMIT
+{% endif %}
