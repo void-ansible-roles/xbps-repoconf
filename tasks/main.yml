@@ -1,14 +1,29 @@
 ---
 - name: Configure firewall
-  template: src=xbps.rules dest=/etc/iptables.d/ owner=root group=root mode=0640
+  template:
+    src: xbps.rules
+    dest: /etc/iptables.d/
+    owner: root
+    group: root
+    mode: 0640
   notify:
     - iptables
 
 - name: Create xbps.d
-  file: path=/etc/xbps.d state=directory owner=root group=root mode=0755
+  file:
+    path: /etc/xbps.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Configure XBPS repositories
-  template: src={{ item }}.conf dest=/etc/xbps.d/{{ item }}.conf owner=root group=root mode=0644
+  template:
+    src: "{{ item }}.conf"
+    dest: /etc/xbps.d/{{ item }}.conf
+    owner: root
+    group: root
+    mode: 0644
   with_items:
     - 00-repository-main
     - 10-repository-nonfree
@@ -16,16 +31,27 @@
     - 10-repository-multilib-nonfree
 
 - name: Configure additional repositories
-  template: src=additional_repo.conf dest=/etc/xbps.d/{{ item.key }}.conf owner=root group=root mode=0644
+  template:
+    src: additional_repo.conf
+    dest: /etc/xbps.d/{{ item.key }}.conf
+    owner: root
+    group: root
+    mode: 0644
   with_dict:
     "{{ xbps_repoconf_repos | default({}) }}"
-  when: "{{ xbps_repoconf_repos is defined }}"
+  when: xbps_repoconf_repos is defined
 
 - name: Configure additional repository fingerprints
-  copy: src=assets/xbps/{{ item.value.fingerprint }}.plist dest=/var/db/xbps/keys/{{ item.value.fingerprint }}.plist owner=root group=root mode=0644
+  copy:
+    src: assets/xbps/{{ item.value.fingerprint }}.plist
+    dest: /var/db/xbps/keys/{{ item.value.fingerprint }}.plist
+    owner: root
+    group: root
+    mode: 0644
   with_dict:
     "{{ xbps_repoconf_repos | default({}) }}"
   when: xbps_repoconf_repos is defined
 
 - name: Sync XBPS
-  xbps: update_cache=yes
+  xbps:
+    update_cache: yes
