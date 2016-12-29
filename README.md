@@ -32,10 +32,10 @@ Variables Required:
   * None
 
 Optional Variables:
-  * xbps_repoconf_repos: A dictionary of dictionaries in the format shown below:
+  * xbps_repoconf_repos: A list of dictionaries in the format shown below:
 
 ```
-[repo name]:
+  - name: repository name, should be a single token with no spaces
   - address: Full address with protocol for the repo
   - serveraddr: Address in dotted form for the repo
   - serverport: Port number the repo listens on
