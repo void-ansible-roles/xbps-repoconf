@@ -3,6 +3,7 @@
 COMMIT
 
 {% if xbps_repoconf_repos %}
+*filter
 {% for repo in xbps_repoconf_repos %}
 -A OUTPUT -p tcp -d {{ repo.serveraddr }} --dport {{ repo.serverport }} -j ACCEPT
 {% endfor %}
