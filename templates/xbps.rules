@@ -2,7 +2,7 @@
 -A OUTPUT -p tcp -d {{ xbps_repository_address }} --dport {{ xbps_repository_port }} -j ACCEPT
 COMMIT
 
-{% if xbps_repoconf_repos %}
+{% if xbps_repoconf_repos is defined %}
 *filter
 {% for repo in xbps_repoconf_repos %}
 -A OUTPUT -p tcp -d {{ repo.serveraddr }} --dport {{ repo.serverport }} -j ACCEPT

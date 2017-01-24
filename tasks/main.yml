@@ -37,7 +37,7 @@
     owner: root
     group: root
     mode: 0644
-  when: xbps_repoconf_repos
+  when: xbps_repoconf_repos is defined
   with_items: "{{ xbps_repoconf_repos }}"
 
 - name: Configure additional repository fingerprints
@@ -47,7 +47,7 @@
     owner: root
     group: root
     mode: 0644
-  when: xbps_repoconf_repos
+  when: xbps_repoconf_repos is defined
   with_items: "{{ xbps_repoconf_repos }}"
 
 - name: Sync XBPS
