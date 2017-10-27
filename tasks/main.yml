@@ -38,6 +38,8 @@
     group: root
     mode: 0644
   with_items: "{{ xbps_repoconf_repos | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Configure additional repository fingerprints
   copy:
@@ -47,6 +49,8 @@
     group: root
     mode: 0644
   with_items: "{{ xbps_repoconf_repos | default([]) }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Sync XBPS
   xbps:
