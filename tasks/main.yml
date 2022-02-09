@@ -24,11 +24,7 @@
     owner: root
     group: root
     mode: 0644
-  with_items:
-    - 00-repository-main
-    - 10-repository-nonfree
-    - 10-repository-multilib
-    - 10-repository-multilib-nonfree
+  with_items: "{{ xbps_repoconf_repos_enabled }}"
 
 - name: Configure additional repositories
   template:

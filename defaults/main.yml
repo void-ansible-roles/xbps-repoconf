@@ -5,3 +5,9 @@ xbps_repository_multilib: https://repo.voidlinux.eu/current/multilib
 xbps_repository_multilib_nonfree: https://repo.voidlinux.eu/current/multilib/nonfree
 xbps_repository_address: repo.voidlinux.eu
 xbps_repository_port: 443
+
+xbps_repoconf_repos_enabled:
+  - 00-repository-main
+  - 10-repository-nonfree
+  - 10-repository-multilib
+  - 10-repository-multilib-nonfree
