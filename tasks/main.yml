@@ -1,53 +1,53 @@
 ---
 - name: Configure firewall
-  template:
+  ansible.builtin.template:
     src: xbps.rules
     dest: /etc/iptables.d/
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables
 
 - name: Create xbps.d
-  file:
+  ansible.builtin.file:
     path: /etc/xbps.d
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Configure XBPS repositories
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.conf"
     dest: /etc/xbps.d/{{ item }}.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items: "{{ xbps_repoconf_repos_enabled }}"
 
 - name: Configure additional repositories
-  template:
+  ansible.builtin.template:
     src: additional_repo.conf
     dest: /etc/xbps.d/{{ item.name }}.conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items: "{{ xbps_repoconf_repos | default([]) }}"
   loop_control:
     label: "{{ item.name }}"
 
 - name: Configure additional repository fingerprints
-  copy:
+  ansible.builtin.copy:
     src: assets/xbps/{{ item.fingerprint }}.plist
     dest: /var/db/xbps/keys/{{ item.fingerprint }}.plist
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   with_items: "{{ xbps_repoconf_repos | default([]) }}"
   loop_control:
     label: "{{ item.name }}"
 
 - name: Sync XBPS
-  xbps:
-    update_cache: yes
+  community.general.xbps:
+    update_cache: true
